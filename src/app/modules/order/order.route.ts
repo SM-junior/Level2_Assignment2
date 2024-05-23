@@ -8,12 +8,4 @@ router.post('/', OrderController.createOrder)
 router.get('/', OrderController.getAllOrder)
 
 
-
-
-
-
-
-
-
-
 export const OrderRoutes = router;

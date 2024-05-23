@@ -23,15 +23,6 @@ const createOrder = async (req: Request, res: Response) => {
         }
         existProduct.save()
 
-        // ProductSchema.pre('save', function (next) {
-        //     if (existProduct.inventory.quantity === 0) {
-        //         existProduct.inventory.inStock = false;
-        //     } else {
-        //         existProduct.inventory.inStock = true;
-        //     }
-        //     next();
-        // });
-
         const orderData = req.body
         const result = await OrderServices.createOrderToDb(orderData);
         res.status(200).json({
@@ -48,26 +39,7 @@ const createOrder = async (req: Request, res: Response) => {
     }
 }
 
-const getAllOrder = async (req: Request, res: Response) => {
-    try {
-        const email = req.query.email as string;
-        const result = await OrderServices.getAllOrderFromDb(email);
-        const message = email ?
-            `Orders fetched successfully for user ${email}!`
-            : `Order fetched successfully!`;
-        res.status(200).json({
-            success: true,
-            message: message,
-            data: result
-        })
-    } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: "Item not found",
-            error: error,
-        });
-    }
-}
+
 
 export const OrderController = {
     createOrder,

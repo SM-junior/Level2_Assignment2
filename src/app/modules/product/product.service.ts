@@ -32,7 +32,6 @@ const getAllProductsFromDb = async (searchTerm: string) => {
   }
 }
 
-
 export const ProductServices = {
   createProductIntoDb,
   getAllProductsFromDb,
