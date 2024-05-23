@@ -22,11 +22,13 @@ const createOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         if (existProduct.inventory.quantity < quantity) {
             return res.status(400).json({ error: 'Insufficient quantity available in inventory' });
         }
+        existProduct.inventory.quantity -= quantity;
         if (existProduct.inventory.quantity === 0) {
             existProduct.inventory.inStock = false;
-            existProduct.save();
         }
-        existProduct.inventory.quantity -= quantity;
+        else {
+            existProduct.inventory.inStock = true;
+        }
         existProduct.save();
         const orderData = req.body;
         const result = yield order_services_1.OrderServices.createOrderToDb(orderData);
@@ -47,7 +49,6 @@ const createOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
 const getAllOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const email = req.query.email;
-        console.log(email);
         const result = yield order_services_1.OrderServices.getAllOrderFromDb(email);
         const message = email ?
             `Orders fetched successfully for user ${email}!`
@@ -62,7 +63,7 @@ const getAllOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         res.status(500).json({
             success: false,
             message: "Item not found",
-            error: error.message,
+            error: error,
         });
     }
 });

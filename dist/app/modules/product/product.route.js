@@ -36,7 +36,7 @@ router.put("/:productId", (req, res) => __awaiter(void 0, void 0, void 0, functi
         res.status(500).json({
             success: false,
             message: "something went wrong",
-            error: error.message,
+            error: error,
         });
     }
 }));

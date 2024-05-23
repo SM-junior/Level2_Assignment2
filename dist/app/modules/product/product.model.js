@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Product = void 0;
+exports.Product = exports.ProductSchema = void 0;
 const mongoose_1 = require("mongoose");
 const variantsSchema = new mongoose_1.Schema({
     type: {
@@ -22,10 +22,11 @@ const inventorySchema = new mongoose_1.Schema({
     },
     inStock: {
         type: Boolean,
+        required: true
     },
 });
 // product schema
-const ProductSchema = new mongoose_1.Schema({
+exports.ProductSchema = new mongoose_1.Schema({
     name: {
         type: String,
         required: true,
@@ -56,4 +57,4 @@ const ProductSchema = new mongoose_1.Schema({
         required: true,
     },
 });
-exports.Product = (0, mongoose_1.model)("Product", ProductSchema);
+exports.Product = (0, mongoose_1.model)("Product", exports.ProductSchema);

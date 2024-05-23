@@ -37,5 +37,4 @@ export const ProductServices = {
   getAllProductsFromDb,
   getSingleProductFromDb,
   deleteProductFromDb,
-
 };

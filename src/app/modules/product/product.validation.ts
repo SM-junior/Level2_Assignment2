@@ -1,5 +1,4 @@
 import { z } from "zod";
-
 //schema for variants
 const variantValidationSchema = z.object({
   type: z.string().max(20),
