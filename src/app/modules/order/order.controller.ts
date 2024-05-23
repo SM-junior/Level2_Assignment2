@@ -18,14 +18,7 @@ const createOrder = async (req: Request, res: Response) => {
         existProduct.inventory.quantity -= quantity;
         existProduct.save()
 
-        ProductSchema.pre('save', function (next) {
-            if (existProduct.inventory.quantity === 0) {
-                existProduct.inventory.inStock = false;
-            } else {
-                existProduct.inventory.inStock = true;
-            }
-            next();
-        });
+
 
         const orderData = req.body
         const result = await OrderServices.createOrderToDb(orderData);
