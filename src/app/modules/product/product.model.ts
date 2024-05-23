@@ -27,7 +27,7 @@ const inventorySchema = new Schema<TInventory>({
 });
 
 // product schema
-const ProductSchema = new Schema<TProduct>({
+export const ProductSchema = new Schema<TProduct>({
   name: {
     type: String,
     required: true,

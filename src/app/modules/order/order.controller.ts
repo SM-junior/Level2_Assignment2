@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { Product } from "../product/product.model";
+import { Product, ProductSchema } from "../product/product.model";
 import { OrderServices } from "./order.services";
 
 const createOrder = async (req: Request, res: Response) => {
@@ -14,12 +14,18 @@ const createOrder = async (req: Request, res: Response) => {
         if (existProduct.inventory.quantity < quantity) {
             return res.status(400).json({ error: 'Insufficient quantity available in inventory' });
         }
-        if (existProduct.inventory.quantity === 0) {
-            existProduct.inventory.inStock = false;
-            existProduct.save()
-        }
+
         existProduct.inventory.quantity -= quantity;
         existProduct.save()
+
+        ProductSchema.pre('save', function (next) {
+            if (existProduct.inventory.quantity === 0) {
+                existProduct.inventory.inStock = false;
+            } else {
+                existProduct.inventory.inStock = true;
+            }
+            next();
+        });
 
         const orderData = req.body
         const result = await OrderServices.createOrderToDb(orderData);
