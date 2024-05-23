@@ -41,7 +41,7 @@ const getSingleProduct = (req, res) => __awaiter(void 0, void 0, void 0, functio
         res.status(200).json({
             success: true,
             message: "Product fetched successfully!",
-            data: null,
+            data: result,
         });
     }
     catch (error) {
@@ -59,7 +59,7 @@ const deleteProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         res.status(200).json({
             success: true,
             message: "Product deleted successfully!",
-            data: result,
+            data: null,
         });
     }
     catch (error) {

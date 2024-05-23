@@ -13,6 +13,8 @@ app.use(express_1.default.json());
 app.use("/api/products", product_route_1.ProductRoutes);
 app.use("/api/orders", order_route_1.OrderRoutes);
 app.get("/", (req, res) => {
-    res.send("hello");
+    res.status(200).json({
+        message: 'hello world'
+    });
 });
 exports.default = app;
