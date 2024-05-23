@@ -1,25 +1,26 @@
-import { string, z } from "zod";
+import { z } from "zod";
 
-
-const VariantsSchema = z.object({
+//schema for variants
+const variantValidationSchema = z.object({
   type: z.string().max(20),
   value: z.string().max(20),
 });
 
-const InventorySchema = z.object({
-  quantity: z.number().int().positive(),
-  inStock: z.boolean(),
+//schema for inventory
+const inventoryValidationSchema = z.object({
+  quantity: z.number().int().max(99), // Assuming max quantity is 99
+  inStock: z.boolean().optional(),
 });
 
-const ProductSchema = z.object({
-  name: z.string().min(1).max(20),
-  description: z.string().min(1),
-  price: z.number().positive(),
-  category: z.string().min(1),
-  // tags: z.array(z.string().min(1)),
-  tags: z.string(),
-  variants: VariantsSchema,
-  inventory: InventorySchema,
+//schema for product
+const productValidationSchema = z.object({
+  name: z.string(),
+  description: z.string(),
+  price: z.number(),
+  category: z.string(),
+  tags: z.array(z.string()),
+  variants: z.array(variantValidationSchema),
+  inventory: inventoryValidationSchema,
 });
 
-export { ProductSchema };
+export default productValidationSchema

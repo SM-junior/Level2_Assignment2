@@ -22,6 +22,7 @@ const inventorySchema = new Schema<TInventory>({
   },
   inStock: {
     type: Boolean,
+    required: true
   },
 });
 
