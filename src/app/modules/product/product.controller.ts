@@ -29,7 +29,7 @@ const getSingleProduct = async (req: Request, res: Response) => {
     res.status(200).json({
       success: true,
       message: "Product fetched successfully!",
-      data: null,
+      data: result,
     });
   } catch (error) {
     res.status(500).json({
@@ -47,7 +47,7 @@ const deleteProduct = async (req: Request, res: Response) => {
     res.status(200).json({
       success: true,
       message: "Product deleted successfully!",
-      data: result,
+      data: null,
     });
   } catch (error) {
     res.status(500).json({
